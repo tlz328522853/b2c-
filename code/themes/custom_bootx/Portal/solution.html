@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+	<html lang="en" class="no-js">
+	<head>
+		<title>{$post_title}</title>
+	    <meta name="keywords" content="{$post_keywords}" />
+		<meta name="description" content="{$post_excerpt}">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		
+		<tc_include file="Public:head" />
+		<style>
+	        body{
+	    	    overflow-x: hidden;
+	        }    	
+        </style>
+	</head>
+<tc_include file="Public:nav" />
+<body>
+<!-- 标头 -->
+<section class="solution_banner commmon_banner" id="solution_banner">
+	<h2 style="text-align:center">{$post_title}</h2>
+	<p style="text-align:center">
+	   {$post_excerpt}
+	</p>
+		<div class="solution_banner_btn">
+			<a href="{$post_mime_type}" style="color:#fff;">联系我们</a>
+		</div>
+</section>
+
+<!-- 展示内容 -->
+<textarea id="content_filtered" name="" style='display:none;'>{$post_content_filtered}</textarea>
+<div id="contentVal"></div>
+
+<div>
+<tc_include file="Public:footer"/>
+</div>
+<tc_include file="Public:scripts"/>
+<script src="__TMPL__Public/assets/js/modernizr.js"></script>
+<script src="__TMPL__Public/assets/js/scrollTabLight.js"></script>
+
+<script>
+
+$(function(){
+	
+	$("#contentVal").html($("#content_filtered").val());
+	var t = n = 0, count;
+	/*导航菜单*/
+	 		$('#nav>ul> li').hover(function() {
+            $('.navList', this).slideDown(200);
+            var $a = $(this).children('a:first');
+            $('#nav>ul> li').removeClass("active");
+            $a.addClass("active");
+        }, function() {
+            $('.navList', this).slideUp(100);
+            var $a = $(this).children('a:first');
+            $a.removeClass("active");
+        });
+        $("#nav").hover(function(){
+        	
+        },function(){
+        	$('#nav>ul> li').eq(2).hasClass("active")?"":$('#nav>ul> li').eq(2).addClass("active");
+        })
+   	 $(".product_nav").scrollTabLight();
+   	 
+  	$("#solution_container_left").find("ul li").click(function(){
+  		
+  		$("#solution_container_left").find("ul li").removeClass("active");
+  		$(this).addClass("active");
+  		
+  		var togContainer=$(this).attr("togContainer");
+  		console.log(togContainer);
+  		
+  		if(togContainer!=null && togContainer!=undefined){{
+  			$(".solution_container_right").css("display","none");
+  			console.log("#"+"togContainer"+togContainer);
+  			console.log($("#"+"togContainer"+togContainer));
+  			$("#"+"togContainer"+togContainer).css("display","block");
+  		}}
+
+  		
+  		
+  	})
+    
+    
+   
+})
+</script>
+</body>
+</html>

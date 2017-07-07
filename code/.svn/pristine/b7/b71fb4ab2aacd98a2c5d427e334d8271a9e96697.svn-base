@@ -1,0 +1,34 @@
+/*更换背景图*/
+//页面等比缩放
+/*window.addEventListener("resize",setRemSize,false);
+function setRemSize(){
+    var _clientWidth=document.documentElement.clientWidth/19.2+"px";
+    document.documentElement.style.fontSize=_clientWidth;
+}
+setRemSize();*/
+function showAuto(){
+    n = n >=(count - 1) ? 0 : ++n;
+    $("#fouse li").eq(n).trigger('click');
+}
+function resetbg(n){
+    var screen_width = $(window).width();
+    var img1440 = "url(images/banner1440_"+n+".png)",img1920 = "url(images/banner1920_"+n+".png)";
+    (screen_width<=1440) ? $("body").css("background-image",img1440):$("body").css("background-image",img1920);
+}
+/*获取参数*/
+function request(paras){ 
+    var urlTest = location.search;
+    var url = urlTest.substring(urlTest.lastIndexOf("?"));
+	//var url = location.search; 
+	var paraString = url.substring(url.indexOf("?")+1,url.length).split("&"); 
+	var paraObj = {} 
+	for (i=0; j=paraString[i]; i++){ 
+	paraObj[j.substring(0,j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=")+1,j.length); 
+	} 
+	var returnValue = paraObj[paras.toLowerCase()]; 
+	if(typeof(returnValue)==undefined){ 
+		return ""; 
+	}else{ 
+		return returnValue; 
+	} 
+}
