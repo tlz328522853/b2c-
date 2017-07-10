@@ -67,15 +67,15 @@
 	<div class="solution_container">
 		<div class="solution_container_left" id="solution_container_left">
 			<ul>
-				<li togContainer="Hw" class="active">
+				<li togContainer="Hw">
 					<a>智慧环卫</a>
 					<i></i>
 				</li>
-				<li togContainer="Water">
+				<li togContainer="Water" class="active" >
 					<a>智慧水务</a>
 					<i></i>
 				</li>
-				<!--<li>
+				<li>
 					<a>新能源</a>
 					<i></i>
 				</li>
@@ -90,7 +90,7 @@
 				<li>
 					<a>数字化城管</a>
 					<i></i>
-				</li>-->
+				</li>
 			</ul>
 		</div>
 		<div class="solution_container_right togContainerHw" id="togContainerHw">

@@ -23,7 +23,7 @@
 .solution_container_right{
 	display: none;
 }
-.togContainerHw{
+.togContainerWater{
 	display: block;
 }
 .solution_container_left{

@@ -1,0 +1,9 @@
+[ 2017-07-10T13:42:58+08:00 ] ::1 /code/index.php?g=Portal&m=AdminPage&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+
+[ 2017-07-10T13:43:01+08:00 ] ::1 /code/index.php?g=&m=AdminPage&a=edit&id=1
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+
+[ 2017-07-10T13:44:21+08:00 ] ::1 /code/index.php?g=&m=AdminPage&a=edit&id=16
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+

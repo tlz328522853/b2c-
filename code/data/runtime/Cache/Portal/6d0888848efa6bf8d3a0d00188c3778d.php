@@ -43,27 +43,31 @@
 
 <section class="product_brand">
 	<div class="product_info">
-		<h3 class="afterBorder">加入我们</h3>
+		<h3 class="afterBorder"><?php echo ($post_title); ?></h3>
 		<p class="f18">
-			一起创造绿色、美好的城市生活环境
+			<?php echo ($post_excerpt); ?>
 		</p>
 	</div>
-	<img src="/code/themes/custom_bootx/Public/assets/images/new/jobDetailBanner.png" alt="" />
+	<?php $smeta=json_decode($smeta,true); ?>
+	<img src="<?php echo sp_get_asset_upload_path($smeta['thumb']);?>" alt="" />
 </section>
 
 <div class="bgWhite">
-<div class="box_inner">
-<div class="job_detail_container">
-	<h3 class="job_detail_title"><?php echo ($post_title); ?></h3>
-	<div class="job_detail_info">
-	 <?php echo ($post_content); ?>
-	</div>   
-	<div>
-		<a href="./index.php?m=page&a=index&id=1&from=pro" class="send_email">投递简历</a>
-		<a href="./index.php?g=portal&m=page&a=index&id=19" class="all_job">全部职位</a>
+	<div class="box_inner">
+		<?php $lists = sp_sql_posts_paged("cid:10;order:post_date DESC;",10); ?>
+		<?php if(is_array($lists['posts'])): $i = 0; $__LIST__ = $lists['posts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; $smeta=json_decode($vo['smeta'],true); ?>
+			<?php if(empty($smeta['thumb'])): ?><div class="newslist">
+			<?php else: ?> 
+			  <div class="newslist hasImg">
+			    <img onclick="javascript:location.href='<?php echo leuu('article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']));?>' " src="<?php echo sp_get_asset_upload_path($smeta['thumb']);?>" alt="" /><?php endif; ?>
+				<div class="newsInfo">
+					<h3><a href="<?php echo leuu('article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']));?>"><?php echo ($vo["post_title"]); ?></a></h3>
+					<p><?php echo ($vo["post_date"]); ?></p>
+					<p><?php echo ($vo["post_excerpt"]); ?></p>
+				</div>
+			</div><?php endforeach; endif; else: echo "" ;endif; ?>
+	    <div class="pagination"><ul><?php echo ($lists['page']); ?></ul></div>
 	</div>
-</div>
-</div>
 </div>
 
 <div>
@@ -89,17 +93,10 @@ div{text-align:center}
 </style> -->
 
 <?php echo hook('footer');?>
-<div class="other_linkBox" style="text-align:center">
-	<h3 class="otherLink_title">友情合作与支持</h3>
-	<?php $links=sp_getlinks(); ?>
-	<?php if(is_array($links)): foreach($links as $key=>$vo): ?>&nbsp;&nbsp;
-		<a href="<?php echo ($vo["link_url"]); ?>" target="<?php echo ($vo["link_target"]); ?>">
-			 <?php if(!empty($vo["link_image"])): ?><img src="<?php echo sp_get_image_url($vo['link_image']);?>"><!-- <?php echo ($vo["link_name"]); ?>链接图片 --><?php endif; ?>
-		</a><?php endforeach; endif; ?>
-</div>
+
 <div id="footer" class="footer">
     <div>
-        <div class="footer_left"style="text-align:center;">
+        <div class="footer_left">
             
             <h3>北京智慧云行科技有限责任公司</h3>
             <p>
@@ -143,6 +140,7 @@ var GV = {
 <script src="/code/themes/custom_bootx/Public/assets/js/scrollTabLight.js"></script>
 <script>
 $(function(){
+     $("#contentVal").html($("#content_filtered").val());
 	/*导航菜单*/
 	 $('#nav>ul> li').hover(function() {
             $('.navList', this).slideDown(200);
@@ -153,6 +151,11 @@ $(function(){
             var $a = $(this).children('a:first');
             $a.removeClass("active");
         });
+	 $("#nav").hover(function(){
+     	
+     },function(){
+     	$('#nav>ul> li').eq(4).hasClass("active")?"":$('#nav>ul> li').eq(4).addClass("active");
+     })
     $(".product_nav").scrollTabLight();
 	
 })

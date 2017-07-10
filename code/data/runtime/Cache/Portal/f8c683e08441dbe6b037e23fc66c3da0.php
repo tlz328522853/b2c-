@@ -116,6 +116,21 @@
     </div> -->
 	
 	 
+<style type="text/css">
+.home_dl {
+    float: left;
+    width: 25%;
+    height: 100%;
+    padding: 50px 33px 0 33px;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.home_dl:hover {
+    box-shadow: 0px 0px 10px 1px rgba(164,164,164,0.34);
+}
+</style>
+
 
 
 <div class="bgWhite homeBg">
@@ -132,15 +147,18 @@
 					<p>标准化流程，精细化管理</p>
 				</div> -->
 				
-				<?php if(is_array($home_slide_menus)): foreach($home_slide_menus as $key=>$vo): ?><div class="home_dl">
+				<?php if(is_array($home_slide_menus)): foreach($home_slide_menus as $key=>$vo): ?><a target="_blank" href="<?php echo ($vo["slide_url"]); ?>">
+						<div class="home_dl">
 						
-						 <div style="background-image: url('<?php echo sp_get_asset_upload_path($vo[slide_pic]);?>');"></div>
-							<a target="_blank" href="<?php echo ($vo["slide_url"]); ?>"
-				 	               style="position：relative;"><h3><?php echo ($vo["slide_name"]); ?></h3>
-							</a>
+						<div style="background-image: url('<?php echo sp_get_asset_upload_path($vo[slide_pic]);?>');"></div>
+							
+						 
+							<h3><?php echo ($vo["slide_name"]); ?></h3>
+							
 							<p><?php echo ($vo["slide_des"]); ?></p>
 							
-						</div><?php endforeach; endif; ?>
+						</div>
+					</a><?php endforeach; endif; ?>
 			</div>
 			<h3  class="lunPlayttl">智慧、可靠的解决方案</h3>
 		</div>
@@ -152,7 +170,7 @@
 		   <!-- $last_post=sp_sql_posts("field:*;order:listorder asc,object_id desc;"); -->
     		<?php $lists = sp_sql_posts_paged("cid:3;order:post_date;"); ?>
     
-			<?php if(is_array($lists['posts'])): $i = 0; $__LIST__ = $lists['posts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="home_imgpli_com">
+			<?php if(is_array($lists['posts'])): $i = 0; $__LIST__ = $lists['posts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="home_imgpli_com" >
 			  <div class="bg"></div>
 			  <div class="imgMeng"></div>
 					<div class="iconBox">
@@ -167,7 +185,7 @@
 						
 						<a target="_blank" href="<?php echo ($vo["post_source"]); ?>"
 			 	               style="position：relative;">
-						<div class="home_look_details" style="color:white;">
+						<div class="home_look_details">
 			 	               	查看详情
 						</div>
 						</a>
@@ -189,6 +207,15 @@
 		</div>
 	</div>
 
+</div>
+
+<div class="other_linkBox" style="text-align:center">
+	<h3 class="otherLink_title">友情合作与支持</h3>
+	<?php $links=sp_getlinks(); ?>
+	<?php if(is_array($links)): foreach($links as $key=>$vo): ?>&nbsp;&nbsp;
+		<a href="<?php echo ($vo["link_url"]); ?>" target="<?php echo ($vo["link_target"]); ?>">
+			 <?php if(!empty($vo["link_image"])): ?><img src="<?php echo sp_get_image_url($vo['link_image']);?>"><!-- <?php echo ($vo["link_name"]); ?>链接图片 --><?php endif; ?>
+		</a><?php endforeach; endif; ?>
 </div>
 
 <div>
@@ -214,17 +241,10 @@ div{text-align:center}
 </style> -->
 
 <?php echo hook('footer');?>
-<div class="other_linkBox" style="text-align:center">
-	<h3 class="otherLink_title">友情合作与支持</h3>
-	<?php $links=sp_getlinks(); ?>
-	<?php if(is_array($links)): foreach($links as $key=>$vo): ?>&nbsp;&nbsp;
-		<a href="<?php echo ($vo["link_url"]); ?>" target="<?php echo ($vo["link_target"]); ?>">
-			 <?php if(!empty($vo["link_image"])): ?><img src="<?php echo sp_get_image_url($vo['link_image']);?>"><!-- <?php echo ($vo["link_name"]); ?>链接图片 --><?php endif; ?>
-		</a><?php endforeach; endif; ?>
-</div>
+
 <div id="footer" class="footer">
     <div>
-        <div class="footer_left"style="text-align:center;">
+        <div class="footer_left">
             
             <h3>北京智慧云行科技有限责任公司</h3>
             <p>
@@ -265,7 +285,112 @@ var GV = {
 	<script src="/code/themes/custom_bootx/Public/assets/js/index.js"></script>
     
 
+<script>
 
+$(function(){
+	var t = n = 0, count;
+	/*导航菜单*/
+	 $('#nav>ul> li').hover(function() {
+            $('.navList', this).slideDown(200);
+            var $a = $(this).children('a:first');
+            $('#nav>ul> li').removeClass("active");
+            $a.addClass("active");
+        }, function() {
+            $('.navList', this).slideUp(100);
+            var $a = $(this).children('a:first');
+            $a.removeClass("active");
+        });
+        $("#nav").hover(function(){
+        	
+        },function(){
+        	$('#nav>ul> li').eq(0).hasClass("active")?"":$('#nav>ul> li').eq(0).addClass("active");
+        })
+   	 $(".product_nav");
+   	 
+    var bannerBimg=["images/home_banner1920.png","images/home_banner1920.png","images/home_banner1920.png"]
+    
+    $("#home_banner_topArrow").animate({
+    	"opacity":"1",
+    	"top":"0px",
+    },1000,"linear")
+   
+   
+	 $("#home_banner_leftArrow").animate({
+    	"opacity":"1",
+    	"bottom":"0px",
+    },1000,"linear")
+     $("#home_banner_rightArrow").animate({
+    	"opacity":"1",
+    	"bottom":"0px",
+    },1000,"linear")
+    $("#home_banner_ball1").animate({
+    	"opacity":"1",
+    	"left":"0px",
+    },1000,"linear")
+    $("#home_banner_ball2").animate({
+    	"opacity":"1",
+    	"right":"0px",
+    },1000,"linear")
+    $("#home_banner_ball3").animate({
+    	"opacity":"1",
+    	"top":"0.2rem",
+    },1000,"linear")
+    $("#home_banner_ball4").animate({
+    	"opacity":"1",
+    	"bottom":"0.32rem",
+    },1000,"linear")
+     $("#home_banner_ball5").animate({
+    	"opacity":"1",
+    	"bottom":"1.18rem",
+    },1000,"linear")
+     $("#home_banner_bottomWave").addClass("add");
+     var bottomWave=document.getElementById("home_banner_bottomWave");
+     bottomWave.addEventListener('webkitAnimationEnd', function (){
+     		
+     		var data=[{"bottom":"-0.28rem"},{"bottom":"0rem"}]
+     		adddHover("home_banner_bottomWave",data,800,"linear");
+     		function adddHover(id,data,time,speed){
+     			$("#"+id).hover(function(){
+     				console.log("hover");
+		     		$(this).animate(data[0],time,speed,function(){
+		     			$(this).animate(data[1],time*0.7,speed);
+		     		})
+		 		})
+     			
+     		}
+			
+			data=[{"top":"-0.6rem"},{"top":"0rem"}];
+     		adddHover("home_banner_topArrow",data,1000,"linear");
+			
+			//左侧箭头
+			data=[{"bottom":"-1rem"},{"bottom":"0rem"}];
+     		adddHover("home_banner_leftArrow",data,1000,"linear");
+     		//右侧箭头
+     		data=[{"bottom":"-1rem"},{"bottom":"0rem"}];
+     		adddHover("home_banner_rightArrow",data,1000,"linear");
+     		
+//   		左右小球
+			data=[{"left":"-0.75rem"},{"left":"0rem"}];
+     		adddHover("home_banner_ball1",data,800,"linear");
+     		
+     		data=[{"right":"-0.75rem"},{"right":"0rem"}];
+     		adddHover("home_banner_ball2",data,800,"linear");
+     		
+     		//中间三个小球
+     		data=[{"top":"0.2rem"},{"top":"0rem"}];
+     		adddHover("home_banner_ball3",data,600,"linear");
+     		
+     		data=[{"bottom":"0.16rem"},{"bottom":"0.32rem"}];
+     		adddHover("home_banner_ball4",data,800,"linear");
+     		
+     		data=[{"bottom":"1rem"},{"bottom":"1.18rem"}];
+     		adddHover("home_banner_ball5",data,800,"linear");
+     		
+     })
+
+  
+})
+</script>
 <?php echo hook('footer_end');?>
 </body>
 </html>

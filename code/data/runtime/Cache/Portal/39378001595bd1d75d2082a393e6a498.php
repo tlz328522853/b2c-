@@ -78,17 +78,10 @@ div{text-align:center}
 </style> -->
 
 <?php echo hook('footer');?>
-<div class="other_linkBox" style="text-align:center">
-	<h3 class="otherLink_title">友情合作与支持</h3>
-	<?php $links=sp_getlinks(); ?>
-	<?php if(is_array($links)): foreach($links as $key=>$vo): ?>&nbsp;&nbsp;
-		<a href="<?php echo ($vo["link_url"]); ?>" target="<?php echo ($vo["link_target"]); ?>">
-			 <?php if(!empty($vo["link_image"])): ?><img src="<?php echo sp_get_image_url($vo['link_image']);?>"><!-- <?php echo ($vo["link_name"]); ?>链接图片 --><?php endif; ?>
-		</a><?php endforeach; endif; ?>
-</div>
+
 <div id="footer" class="footer">
     <div>
-        <div class="footer_left"style="text-align:center;">
+        <div class="footer_left">
             
             <h3>北京智慧云行科技有限责任公司</h3>
             <p>
@@ -143,6 +136,11 @@ $(function(){
             var $a = $(this).children('a:first');
             $a.removeClass("active");
         });
+	 $("#nav").hover(function(){
+     	
+     },function(){
+     	$('#nav>ul> li').eq(3).hasClass("active")?"":$('#nav>ul> li').eq(3).addClass("active");
+     })
     $(".product_nav").scrollTabLight();
 	
 })

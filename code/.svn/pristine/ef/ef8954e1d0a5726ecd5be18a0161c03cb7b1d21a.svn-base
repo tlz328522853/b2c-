@@ -4,9 +4,6 @@ window.addEventListener("resize",setRemSize,false);
 function setRemSize(){
     var _clientWidth=document.documentElement.clientWidth/19.2+"px";
     document.documentElement.style.fontSize=_clientWidth;
-    var changeSize=document.documentElement.clientWidth/1920;
-    changeSize=changeSize.toFixed(2);
-    $(".home_imgplaylist").css({"height":420*changeSize+"px"});
 }
 setRemSize();
 

@@ -1,10 +1,9 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-	<html lang="en" class="no-js">
+	<html>
 	<head>
-		<title><?php echo ($post_title); ?></title>
-	    <meta name="keywords" content="<?php echo ($post_keywords); ?>" />
-		<meta name="description" content="<?php echo ($post_excerpt); ?>">
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<title>新闻详情</title>
+		<meta name="keywords" content="<?php echo ($site_seo_keywords); ?>" />
+		<meta name="description" content="<?php echo ($post_title); ?>">
 			<?php  function _sp_helloworld(){ echo "hello ThinkCMF!"; } function _sp_helloworld2(){ echo "hello ThinkCMF2!"; } function _sp_helloworld3(){ echo "hello ThinkCMF3!"; } ?>
 	<?php $portal_index_lastnews="1,2"; $portal_hot_articles="1,2"; $portal_last_post="1,2"; $tmpl=sp_get_theme_path(); $default_home_slides=array( array( "slide_name"=>"智慧云行，环境守卫！！", "slide_pic"=>$tmpl."Public/assets/images/demo/1.jpg", "slide_url"=>"", ), array( "slide_name"=>"智慧云行，环境守卫！！", "slide_pic"=>$tmpl."Public/assets/images/demo/2.jpg", "slide_url"=>"", ), array( "slide_name"=>"智慧云行，环境守卫！！", "slide_pic"=>$tmpl."Public/assets/images/demo/3.jpg", "slide_url"=>"", ), ); ?>
 	<meta name="author" content="智慧云行">
@@ -28,12 +27,41 @@
 	<link href="/code/themes/custom_bootx/Public/assets/css/solution.css" rel="stylesheet">
 	
 		<style>
-	        body{
-	    	    overflow-x: hidden;
-	        }    	
-        </style>
+			.newsTitle{
+				font-size: 28px;
+				font-weight: bold;
+				margin: 0px 0px 12px 0px;font-weight: normal;color:#333333;
+			}
+			.newsTime{font-size: 12px;color:#999;margin-bottom: 25px;}
+			.newsPara{font-size:16px;line-height: 1.5rem;padding-bottom: 26px;color:#666;}
+			.newContainer>*:last-child{
+				margin-bottom: 0px;
+			}
+			.newImgs{
+				padding:0% 0px 26px;
+			}
+			.newImgs img{display: block;margin: 0px auto;width: 100%;}
+			@media screen and (max-width: 900px) {
+			    .newsTitle{
+			    	font-size: 20px;
+			    }
+			    .newsPara{
+			    	font-size: 12px;
+			    	padding-bottom: 20px;
+			    	line-height: 1.2rem;
+			    }
+			    .bread_nav a{
+			    	font-size: 12px;
+			    }
+			}
+			@media screen and (min-width: 1500px) {
+			    .newContainer{
+			    	width: 620px;
+			    }
+			}
+		</style>
 	</head>
-
+	
 <body>
 <?php echo hook('body_start');?>
 <div class='shadow'>
@@ -46,18 +74,21 @@
 	</header>  
 </div>
 
-<section class="product_brand">
-	<div class="product_info">
-		<h3><?php echo ($post_title); ?></h3>
-		<p>
-			<?php echo ($post_excerpt); ?>
-		</p>
-	</div>
-	<?php $smeta=json_decode($smeta,true); ?>
-	<img src="<?php echo sp_get_image_preview_url($slide_pic); echo ($smeta["thumb"]); ?>" alt="" />
-</section>
-<textarea id="content_filtered" name="" style='display:none;'><?php echo ($post_content_filtered); ?></textarea>
-<div id="contentVal"></div>
+<div class="newsBox">
+    <div class="box_inner">
+		<div class="bread_nav">
+			<!-- <a href="/">首页</a>
+			<a href="/index.php?m=page&a=index&id=16">信息中心</a> -->
+			<!-- <a href="">正文</a> -->
+		</div>
+    </div>
+    <div class="newContainer">
+	    <h3 class="newsTitle"><?php echo ($post_title); ?></h3>
+	    <p class="newsTime"><?php echo ($post_date); ?></p>
+		<?php echo ($post_content); ?>
+    </div>
+</div>
+
 
 <div>
 <!-- <br>
@@ -125,41 +156,18 @@ var GV = {
 	<script src="/code/themes/custom_bootx/Public/assets/js/index.js"></script>
     
 
-<script src="/code/themes/custom_bootx/Public/assets/js/modernizr.js"></script>
-<script src="/code/themes/custom_bootx/Public/assets/js/scrollTabLight.js"></script>
 <script>
-$("#contentVal").html($("#content_filtered").val());
 $(function(){
 	/*导航菜单*/
- $('#nav>ul> li').hover(function() {
-        $('.navList', this).slideDown(200);
-        var $a = $(this).children('a:first');
-        $a.addClass("active");
-    }, function() {
-        $('.navList', this).slideUp(100);
-        var $a = $(this).children('a:first');
-        $a.removeClass("active");
-    });
- $("#nav").hover(function(){
- 	
- },function(){
- 	$('#nav>ul> li').eq(1).hasClass("active")?"":$('#nav>ul> li').eq(1).addClass("active");
- })
-    //tab切换
-	var pro=request("from");
-	var len=$("#tab li").length;
-	console.log(pro);
-	$("#tab li").click(function(){
-		var index=$(this).index();
-		$(this).addClass("current").siblings().removeClass("current");
-		$("#tabContainer>div").eq(index).addClass("current").siblings().removeClass("current");
-	})
-	var pro=request("from");
-	if(pro=="pro"){
-		$("#tab li").eq(len-1).click()
-	}else{
-		$("#tab li").eq(0).click()
-	}
+	 $('#nav>ul> li').hover(function() {
+            $('.navList', this).slideDown(200);
+            var $a = $(this).children('a:first');
+            $a.addClass("active");
+        }, function() {
+            $('.navList', this).slideUp(100);
+            var $a = $(this).children('a:first');
+            $a.removeClass("active");
+        });
 })
 </script>
 <?php echo hook('footer_end');?>

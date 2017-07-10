@@ -47,13 +47,13 @@
 <body>
 <!-- 标头 -->
 <section class="solution_banner commmon_banner" id="solution_banner">
-	<h2 style="text-align:center"><?php echo ($post_title); ?></h2>
-	<p style="text-align:center">
-	   <?php echo ($post_excerpt); ?>
-	</p>
-		<div class="solution_banner_btn">
-			<a href="<?php echo ($post_mime_type); ?>" style="color:#fff;">联系我们</a>
-		</div>
+	<div class="product_info"> 
+		<h3 style="text-align:center"><?php echo ($post_title); ?></h3>
+		<p style="text-align:center">
+		   <?php echo ($post_excerpt); ?>
+		</p>
+		<a href="<?php echo ($post_mime_type); ?>" style="color:#fff;">联系我们</a>
+	</div>
 </section>
 
 <!-- 展示内容 -->
@@ -83,17 +83,10 @@ div{text-align:center}
 </style> -->
 
 <?php echo hook('footer');?>
-<div class="other_linkBox" style="text-align:center">
-	<h3 class="otherLink_title">友情合作与支持</h3>
-	<?php $links=sp_getlinks(); ?>
-	<?php if(is_array($links)): foreach($links as $key=>$vo): ?>&nbsp;&nbsp;
-		<a href="<?php echo ($vo["link_url"]); ?>" target="<?php echo ($vo["link_target"]); ?>">
-			 <?php if(!empty($vo["link_image"])): ?><img src="<?php echo sp_get_image_url($vo['link_image']);?>"><!-- <?php echo ($vo["link_name"]); ?>链接图片 --><?php endif; ?>
-		</a><?php endforeach; endif; ?>
-</div>
+
 <div id="footer" class="footer">
     <div>
-        <div class="footer_left"style="text-align:center;">
+        <div class="footer_left">
             
             <h3>北京智慧云行科技有限责任公司</h3>
             <p>
@@ -134,54 +127,53 @@ var GV = {
     
 
 <script src="/code/themes/custom_bootx/Public/assets/js/modernizr.js"></script>
-<script src="/code/themes/custom_bootx/Public/assets/js/scrollTabLight.js"></script>
+<!-- <script src="/code/themes/custom_bootx/Public/assets/js/scrollTabLight.js"></script> -->
 
 <script>
+	$(function(){
+		 $("#contentVal").html($("#content_filtered").val());
+		var t = n = 0, count;
+		
+		/*导航菜单*/
+		 		$('#nav>ul> li').hover(function() {
+	            $('.navList', this).slideDown(200);
+	            var $a = $(this).children('a:first');
+	            $('#nav>ul> li').removeClass("active");
+	            $a.addClass("active");
+	        }, function() {
+	            $('.navList', this).slideUp(100);
+	            var $a = $(this).children('a:first');
+	            $a.removeClass("active");
+	        });
+	        $("#nav").hover(function(){
+	        	
+	        },function(){
+	        	$('#nav>ul> li').eq(2).hasClass("active")?"":$('#nav>ul> li').eq(2).addClass("active");
+	        })
+//	 	 $(".product_nav").scrollTabLight();
+	   	 
+	  	$("#solution_container_left").find("ul li").click(function(){
+	  		
+	  		$("#solution_container_left").find("ul li").removeClass("active");
+	  		$(this).addClass("active");
+	  		
+	  		var togContainer=$(this).attr("togContainer");
+	  		console.log(togContainer);
+	  		
+	  		if(togContainer!=null && togContainer!=undefined){{
+	  			$(".solution_container_right").css("display","none");
+	  			console.log("#"+"togContainer"+togContainer);
+	  			console.log($("#"+"togContainer"+togContainer));
+	  			$("#"+"togContainer"+togContainer).css("display","block");
+	  		}}
 
-$(function(){
-	
-	$("#contentVal").html($("#content_filtered").val());
-	var t = n = 0, count;
-	/*导航菜单*/
-	 		$('#nav>ul> li').hover(function() {
-            $('.navList', this).slideDown(200);
-            var $a = $(this).children('a:first');
-            $('#nav>ul> li').removeClass("active");
-            $a.addClass("active");
-        }, function() {
-            $('.navList', this).slideUp(100);
-            var $a = $(this).children('a:first');
-            $a.removeClass("active");
-        });
-        $("#nav").hover(function(){
-        	
-        },function(){
-        	$('#nav>ul> li').eq(2).hasClass("active")?"":$('#nav>ul> li').eq(2).addClass("active");
-        })
-   	 $(".product_nav").scrollTabLight();
-   	 
-  	$("#solution_container_left").find("ul li").click(function(){
-  		
-  		$("#solution_container_left").find("ul li").removeClass("active");
-  		$(this).addClass("active");
-  		
-  		var togContainer=$(this).attr("togContainer");
-  		console.log(togContainer);
-  		
-  		if(togContainer!=null && togContainer!=undefined){{
-  			$(".solution_container_right").css("display","none");
-  			console.log("#"+"togContainer"+togContainer);
-  			console.log($("#"+"togContainer"+togContainer));
-  			$("#"+"togContainer"+togContainer).css("display","block");
-  		}}
-
-  		
-  		
-  	})
-    
-    
-   
-})
+	  		
+	  		
+	  	})
+	    
+	    
+	   
+	})
 </script>
 </body>
 </html>

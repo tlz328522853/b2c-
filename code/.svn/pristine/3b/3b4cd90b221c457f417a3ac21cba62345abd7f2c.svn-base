@@ -23,7 +23,7 @@
 .solution_container_right{
 	display: none;
 }
-.togContainerHw{
+.togContainerWater{
 	display: block;
 }
 .solution_container_left{
@@ -84,6 +84,7 @@
 	width: 100%;
     height: 0.1rem;
     font-size: 0.2rem;
+    color: #000;
     clear: both;
     border-bottom: 1px solid #ddd;
 }
@@ -111,6 +112,7 @@
 }
 .solution_Rinbox p{
 	line-height: 0.26rem;
+	color: #000;
 	font-size: 0.14rem;
 	word-wrap: break-word;
 }

@@ -25,26 +25,27 @@
 </section>
 
 <div class="bgWhite">
-<div class="box_inner">
-	<div class="job_container">
-	    <php>
-		        $tag="where:description ='招贤纳士';";
-			    $terms = sp_get_terms($tag);
+	<div class="box_inner">
+		<php>
+			$lists = sp_sql_posts_paged("cid:10;order:post_date DESC;",10);
 		</php>
-   		<foreach name="terms" item="voo">
-			<h3 class="job_title">{$voo.name}</h3>
-			<ul class="job_lists">
-			    <php>
-				    $lists = sp_sql_posts_paged("cid:$voo[term_id];order:post_date ASC;",100);
-				</php>
-				<volist name="lists['posts']" id="vo">
-					<li><a href="{:leuu('article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a></li>
-				</volist>
-			</ul>
-		</foreach>
+		<volist name="lists['posts']" id="vo">
+		    <php>$smeta=json_decode($vo['smeta'],true);</php>
+			<if condition="empty($smeta['thumb'])">
+			  <div class="newslist">
+			<else /> 
+			  <div class="newslist hasImg">
+			    <img onclick="javascript:location.href='{:leuu('article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}' " src="{:sp_get_asset_upload_path($smeta['thumb'])}" alt="" />
+			</if>
+				<div class="newsInfo">
+					<h3><a href="{:leuu('article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a></h3>
+					<p>{$vo.post_date}</p>
+					<p>{$vo.post_excerpt}</p>
+				</div>
+			</div>
+		</volist>
+	    <div class="pagination"><ul>{$lists['page']}</ul></div>
 	</div>
-
-</div>
 </div>
 
 <div>
@@ -55,22 +56,17 @@
 <script src="__TMPL__Public/assets/js/scrollTabLight.js"></script>
 <script>
 $(function(){
+     $("#contentVal").html($("#content_filtered").val());
 	/*导航菜单*/
 	 $('#nav>ul> li').hover(function() {
             $('.navList', this).slideDown(200);
             var $a = $(this).children('a:first');
-            $('#nav>ul> li').removeClass("active");
             $a.addClass("active");
         }, function() {
             $('.navList', this).slideUp(100);
             var $a = $(this).children('a:first');
             $a.removeClass("active");
         });
-	  $("#nav").hover(function(){
-      	
-      },function(){
-      	$('#nav>ul> li').eq(5).hasClass("active")?"":$('#nav>ul> li').eq(5).addClass("active");
-      })
     $(".product_nav").scrollTabLight();
 	
 })

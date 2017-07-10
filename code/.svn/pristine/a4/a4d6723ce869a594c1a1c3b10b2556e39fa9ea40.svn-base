@@ -2132,7 +2132,6 @@ span.jj_logo8{
 	text-align: center;
 	line-height: 36px;
 	padding-bottom: 23px;
-	font-weight: normal;
 }
 .other_linkBox ul{
 	width: 9.54rem;
